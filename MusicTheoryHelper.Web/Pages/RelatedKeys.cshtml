@@ -1,0 +1,20 @@
+@page
+@model MusicTheoryHelper.Web.Pages.RelatedKeysModel
+
+<h2>Related Keys</h2>
+<form method="post">
+    <label>Enter key (e.g., C major, A minor)</label><br/>
+    <input asp-for="KeyName" style="width: 250px;" />
+    <button type="submit">Find Related</button>
+</form>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <p class="error">@Model.ErrorMessage</p>
+}
+
+@if (Model.Result is not null)
+{
+    <p><strong>Relative key:</strong> @Model.Result.RelativeKey</p>
+    <p><strong>Neighbor keys:</strong> @string.Join(", ", Model.Result.NeighborKeys)</p>
+}

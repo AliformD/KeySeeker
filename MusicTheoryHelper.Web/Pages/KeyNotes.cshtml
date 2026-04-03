@@ -1,0 +1,19 @@
+@page
+@model MusicTheoryHelper.Web.Pages.KeyNotesModel
+
+<h2>Notes in a Key</h2>
+<form method="post">
+    <label>Enter key (e.g., C major, A minor)</label><br/>
+    <input asp-for="KeyName" style="width: 250px;" />
+    <button type="submit">Show Notes</button>
+</form>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <p class="error">@Model.ErrorMessage</p>
+}
+
+@if (Model.Notes.Count > 0)
+{
+    <p><strong>@Model.KeyName:</strong> @string.Join(", ", Model.Notes)</p>
+}
