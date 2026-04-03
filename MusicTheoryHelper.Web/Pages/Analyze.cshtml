@@ -1,0 +1,33 @@
+@page
+@model MusicTheoryHelper.Web.Pages.AnalyzeModel
+
+<h2>Analyze Notes</h2>
+<form method="post">
+    <label>Enter notes (e.g., C E G or C, E, G)</label><br/>
+    <input asp-for="InputNotes" style="width: 350px;" />
+    <button type="submit">Analyze</button>
+</form>
+
+@if (!string.IsNullOrWhiteSpace(Model.ErrorMessage))
+{
+    <p class="error">@Model.ErrorMessage</p>
+}
+
+@if (Model.Result is not null)
+{
+    <h3>Possible Chords</h3>
+    <ul>
+        @foreach (var chord in Model.Result.PossibleChords)
+        {
+            <li>@chord</li>
+        }
+    </ul>
+
+    <h3>Possible Keys</h3>
+    <ul>
+        @foreach (var key in Model.Result.PossibleKeys)
+        {
+            <li>@key</li>
+        }
+    </ul>
+}
